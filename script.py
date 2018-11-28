@@ -26,3 +26,4 @@ while True:
     food_trie.find_word_by_prefix(user_input)
 
     # After finding food type write code for retrieving restaurant data h
+

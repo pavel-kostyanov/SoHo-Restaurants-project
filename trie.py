@@ -17,6 +17,8 @@ class TrieNode:
         return self.letter
 
 
+
+
 class Trie:
     def __init__(self):
         self.root_node = TrieNode()
@@ -24,7 +26,7 @@ class Trie:
     def get_root_node(self):
         return self.root_node
 
-    def printAllNodes(self):
+    def print_all_nodes(self):
         node = self.get_root_node
         for letter in node.children.key:
             print(letter)
@@ -32,7 +34,6 @@ class Trie:
             for letter in node.children.key:
                 print(letter)
                 node = node.children(letter)
-
 
     def insert_word(self, word):
         node = self.root_node
@@ -46,7 +47,6 @@ class Trie:
                 node = new_node
         node.value = word
         return True
-
 
     def find_word(self, word):
         node = self.root_node
@@ -81,43 +81,24 @@ class Trie:
                                 else:
                                     return node.letter
                 # return self.tree_search(node)
-            else:
-                return word
-
-    def find_variants(self, node):
-        results = set()
-        if self.flag:
-            results.add(prefix)
-        if not self.children: return results
-        return [node.find_variants(prefix + char) for (char, node) in self.children.items()]
+            # else:
+            #    return word
 
     def find_word_by_prefix(self, prefix):
         node = self.root_node
-        variants = []
-        word = ''
+        # results = []
         current_letter = None
         for i in range(len(prefix)):
             current_letter = prefix[i]
             if current_letter in node.children:
                 node = node.children[current_letter]
         if node.children:
-            return self.find_variants(node)
+            for letter, obj in node.children.items():
+                print(self.find_variants(obj))
 
-        print(variants)
-
- """
-    def all_suffixes(self, prefix):
-        results = set()
-        if self.flag:
-            results.add(prefix)
-        if not self.children: return results
-        return reduce(lambda a, b: a | b, [node.all_suffixes(prefix + char) for (char, node) in self.children.items()]) | results
-
-    def autocomplete(self, prefix):
-        node = self
-        for char in prefix:
-            if char not in node.children:
-                return set()
-            node = node.children[char]
-return list(node.all_suffixes(prefix))
- """
+    def find_variants(self, node):
+        if not node.children:
+            return node.value
+        else:
+            for letter, obj in node.children.items():
+                return self.find_variants(obj)
