@@ -35,7 +35,7 @@ class Trie:
 
 
     def insert_word(self, word):
-        node = self.get_root_node
+        node = self.root_node
         for i in range(len(word)):
             current_letter = word[i]
             if current_letter in node.children:
@@ -44,23 +44,9 @@ class Trie:
                 new_node = TrieNode(letter = current_letter)
                 node.children[word[i]] = new_node
                 node = new_node
-         node.value = word
+        node.value = word
+        return True
 
-
-"""
-    def insert_word(self, word):
-        node = self.root_node
-        for i in range(len(word)):
-            current_letter = word[i]
-            if current_letter in node.children:
-                node = node.children[current_letter]
-            else:
-                new_node = TrieNode(current_letter)
-                node.children[current_letter] = new_node
-                node = new_node
-        node = TrieNode(letter = word, word_end = True)
-        # node.word_end = True
-"""
 
     def find_word(self, word):
         node = self.root_node
@@ -98,6 +84,12 @@ class Trie:
             else:
                 return word
 
+    def find_variants(self, node):
+        results = set()
+        if self.flag:
+            results.add(prefix)
+        if not self.children: return results
+        return [node.find_variants(prefix + char) for (char, node) in self.children.items()]
 
     def find_word_by_prefix(self, prefix):
         node = self.root_node
@@ -108,37 +100,24 @@ class Trie:
             current_letter = prefix[i]
             if current_letter in node.children:
                 node = node.children[current_letter]
-        while node.children:
-            for key in node.children.keys():
-                next_node = node.children[key]
-                if next_node.value:
-                    variants.append(value)
-                if not next_node.children:
-                    return
-                else:
-                    for key in next_node.children.keys():
-                        next_node = next_node.children[key]
-                        if next_node.value:
-                            variants.append(value)
-                        if not next_node.children:
-                            return
-                        else:
-                            for key in next_node.children.keys():
-                                next_node = next_node.children[key]    
-
-
-
-        print(node.children)
         if node.children:
-            x = self.tree_search(node)
-            print(x)
+            return self.find_variants(node)
 
-        else:
-            return
+        print(variants)
 
-        print(word)
+ """
+    def all_suffixes(self, prefix):
+        results = set()
+        if self.flag:
+            results.add(prefix)
+        if not self.children: return results
+        return reduce(lambda a, b: a | b, [node.all_suffixes(prefix + char) for (char, node) in self.children.items()]) | results
 
-        return True
-
-    def remove_word(self, word):
-        pass
+    def autocomplete(self, prefix):
+        node = self
+        for char in prefix:
+            if char not in node.children:
+                return set()
+            node = node.children[char]
+return list(node.all_suffixes(prefix))
+ """
