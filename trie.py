@@ -94,11 +94,13 @@ class Trie:
                 node = node.children[current_letter]
         if node.children:
             for letter, obj in node.children.items():
-                print(self.find_variants(obj))
+                print(self.__find_variants(obj))
 
-    def find_variants(self, node):
+    def __find_variants(self, node, results = None):
+        results = results or []
+
         if not node.children:
-            return node.value
+            results.append(node.value)
         else:
             for letter, obj in node.children.items():
-                return self.find_variants(obj)
+                return self.__find_variants(obj, results)
