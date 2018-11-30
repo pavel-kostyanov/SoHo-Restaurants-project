@@ -21,7 +21,7 @@ root_node = food_trie.get_root_node()
 # Write code for user interaction here
 while True:
     user_input = str(input("\nWhat type of food would you like to eat?\nType the beginning of that food type and press \
-     enter to see if it's here.\n")).lower()
+enter to see if it's here.\n")).lower()
     # Search for user_input in food types data structure here
     food_trie.find_word_by_prefix(user_input)
 

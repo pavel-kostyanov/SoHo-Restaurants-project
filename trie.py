@@ -22,6 +22,7 @@ class TrieNode:
 class Trie:
     def __init__(self):
         self.root_node = TrieNode()
+        self.results = []
 
     def get_root_node(self):
         return self.root_node
@@ -86,21 +87,25 @@ class Trie:
 
     def find_word_by_prefix(self, prefix):
         node = self.root_node
-        # results = []
         current_letter = None
         for i in range(len(prefix)):
             current_letter = prefix[i]
             if current_letter in node.children:
                 node = node.children[current_letter]
+            else:
+                print("The type of food starting with this letters is not in our database")
+                return
         if node.children:
-            for letter, obj in node.children.items():
-                print(self.__find_variants(obj))
-
-    def __find_variants(self, node, results = None):
-        results = results or []
-
-        if not node.children:
-            results.append(node.value)
+            self.__find_variants(node)
+            print("With those beginning letters, your choices are {0} ".format(self.results))
         else:
-            for letter, obj in node.children.items():
-                return self.__find_variants(obj, results)
+            print(node.value)
+
+
+    def __find_variants(self, node):
+        if not node.children:
+            self.results.append(node.value)
+            return
+        else:
+            for letter, node_obj in node.children.items():
+                self.__find_variants(node_obj)
