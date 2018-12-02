@@ -1,10 +1,5 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Nov 20 14:53:41 2018
-
-@author: pavel
-"""
-
+from data import *
+from hashmap import HashMap
 
 class TrieNode:
     def __init__(self, letter = None, value = None, word_end = False):
@@ -86,21 +81,20 @@ class Trie:
             #    return word
 
     def find_word_by_prefix(self, prefix):
+        self.results = []
         node = self.root_node
         current_letter = None
+        if prefix in types:
+            return prefix
         for i in range(len(prefix)):
             current_letter = prefix[i]
             if current_letter in node.children:
                 node = node.children[current_letter]
             else:
-                print("The type of food starting with this letters is not in our database")
-                return
+                return None
         if node.children:
             self.__find_variants(node)
-            print("With those beginning letters, your choices are {0} ".format(self.results))
-        else:
-            print(node.value)
-
+            return self.results
 
     def __find_variants(self, node):
         if not node.children:
