@@ -39,10 +39,13 @@ while True:
             user_input = input("Enter again - ").lower()
         if user_input == "y":
             print("\nThe {} Restaurants in SoHo are... ".format(food_type[0].title()))
+			# variable  "list_of_all_restaurants" is a linked list of all restaurants from hash-table
             list_of_all_restaurants = restaurant_hash_table.retrieve(food_type[0])
+			# variable  "list_of_all_restaurants" is transformed into formatted text onto the screen
             print(list_of_all_restaurants.get_restaurants_data(food_type[0]))
             user_input = input(
                 "Do you want to find other restaurants? Enter \"y\" for YES and \"n\" for NO. - ").lower()
+			#  we forced a user enter Y or N only
             while user_input != "y" and user_input != "n":
                 print("\nEnter only \"y\" for YES and \"n\" for NO.")
                 user_input = input("Enter again - ").lower()
@@ -53,7 +56,7 @@ while True:
         if user_input == "n":
             continue
 
-    # this is the case when we are getting more than just one result from a type_food array
+    # this is the case when we are getting more than one type of food with given prefix
     if isinstance(food_type, list) and len(food_type) > 1:
         print("With those beginning letters, your choices are {} ".format(', '.join(food_type)))
 
