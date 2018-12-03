@@ -22,7 +22,6 @@ class HashMap:
       self.array[array_index] = LinkedList([key, value])
       return
     else:
-      # print(str(key) +" = "+ str(array_index))
       self.array[array_index].insert_beginning([key, value])
       return
 

@@ -33,12 +33,11 @@ class LinkedList:
         else:
           current_node = next_node
 
-  def stringify_list_with_right_key_only(self, key):
-    string_list = ""
+  def stringify_list_with_proper_keys_only(self, key):
+    string_list = "---------------------\n\n"
     current_node = self.head_node
     while current_node:
       if current_node.value[0] == key:
-        string_list += str(current_node.value[1]) + "\n"
-        
+        string_list += "Name: {restaraunts_info[0]}\nPrice: {restaraunts_info[1]}\nRating: {restaraunts_info[2]}\nAddress: {restaraunts_info[3]}\n\n---------------------\n\n".format(restaraunts_info = current_node.value[1])
       current_node = current_node.get_next_node()
     return string_list
