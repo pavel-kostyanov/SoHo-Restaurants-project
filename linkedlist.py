@@ -33,6 +33,10 @@ class LinkedList:
         else:
           current_node = next_node
 
+  """
+  Method get_restaurants_data() gets a type of food as a 'key' parameter and
+  then returns the formatted string with all variants of restaurants
+  """
   def get_restaurants_data(self, key):
     string_list = '---------------------\n\n'
     current_node = self.head_node
