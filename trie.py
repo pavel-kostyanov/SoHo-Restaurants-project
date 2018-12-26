@@ -10,9 +10,9 @@ from hashmap import HashMap
 """
 class TrieNode:
     def __init__(self, letter = None, value = None, word_end = False):
-        self.letter = letter
-        self.value = value
-        self.word_end = word_end
+        self.letter = letter # aletter of each node is inside self.childre
+        self.value = value # a word that we are seeking for
+        self.word_end = word_end # a flag of the end of the word
         self.children = {}
 
     def get_letter(self):
@@ -29,20 +29,12 @@ class Trie:
     def get_root_node(self):
         return self.root_node
 
-    def print_all_nodes(self):
-        node = self.get_root_node
-        for letter in node.children.key:
-            print(letter)
-            node = node.children(letter)
-            for letter in node.children.key:
-                print(letter)
-                node = node.children(letter)
     """
     The method insert_word gets a word as a parameter and
       construct a Trie structure from input words.
     """
     def insert_word(self, word):
-        node = self.root_node
+        node = self.get_root_node()
         for i in range(len(word)):
             current_letter = word[i]
             if current_letter in node.children:
@@ -58,10 +50,10 @@ class Trie:
     """
     The method find_word gets a word as a parameter and
       checks if this word is in a Trie and if Yes returns True.
-      We dont use this method in this certain project.
+      But we dont use this method in this certain project.
     """
     def find_word(self, word):
-        node = self.root_node
+        node = self.get_root_node()
         for i in range(len(word)):
             current_letter = word[i]
             if node.children[current_letter]:
@@ -70,34 +62,7 @@ class Trie:
                 return False
         return True
 
-    """
 
-    """
-    def tree_search(self, node):
-        if node.word_end == True:
-            return
-
-        for letter in node.children.keys():
-            if node.word_end == False:
-                word = letter
-                node = node.children[letter]
-                if node.word_end == False:
-                    for letter in node.children.keys():
-                        word = letter
-                        node = node.children[letter]
-                        if node.word_end == False:
-                            for letter in node.children.keys():
-                                word = letter
-                                node = node.children[letter]
-                                if node.word_end == False:
-                                    for letter in node.children.keys():
-                                        word = letter
-                                        node = node.children[letter]
-                                else:
-                                    return node.letter
-                # return self.tree_search(node)
-            # else:
-             #    return word
     """
     'find_word_by_prefix' processes input prefix, checks if the prefix matches a whole word in the
       'type' food list, then reaches the last letter of the prefix and passes the last node of a prefix

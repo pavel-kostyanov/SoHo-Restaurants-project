@@ -1,5 +1,5 @@
-from trie import *
-from data import *
+from trie import Trie
+from data import types, restaurant_data
 from welcome import print_welcome
 from hashmap import HashMap
 
@@ -75,7 +75,7 @@ while True:
         linkedList_of_all_restaurants = restaurant_hash_table.retrieve(food_type)
         # variable  "linkedList_of_all_restaurants" is been transformed into formatted text onto the screen
         # get_restaurants_data() is a method in our LinkedList class
-        print(linkedLlist_of_all_restaurants.get_restaurants_data(food_type))
+        print(linkedList_of_all_restaurants.get_restaurants_data(food_type))
         user_input = input("Do you want to find other restaurants? Enter \"y\" for YES and \"n\" for NO. - ").lower()
         #  we forced a user enter Y or N only
         while user_input != "y" and user_input != "n":
