@@ -2,11 +2,11 @@ class Node
 {
     private:
         int value;
-        int next_node;
+        Node* next_node;
 
     public:
 
-        Node(int val, int nextNode) : value(val), next_node(nextNode)
+        Node(int val, Node* nextNode = NULL) : value(val), next_node(nextNode)
         {   }
 
         void set_next_node(int nextNode)
