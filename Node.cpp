@@ -1,3 +1,5 @@
+#include <iostream>
+
 class Node
 {
     private:
@@ -9,12 +11,12 @@ class Node
         Node(int val, Node* nextNode = NULL) : value(val), next_node(nextNode)
         {   }
 
-        void set_next_node(int nextNode)
+        void set_next_node(Node* nextNode)
         {
             next_node = nextNode;
         }
 
-        int get_next_node()
+        Node* get_next_node()
         {
             return next_node;
         }
